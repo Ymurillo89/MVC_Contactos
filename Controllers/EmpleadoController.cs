@@ -25,7 +25,7 @@ namespace MVC_Contactos.Controllers
 
         [HttpPost]
         //Para obtener los datos del formulario y mandarlos
-        public IActionResult GuardarClientes(EmpleadoModel oEmpleado)
+        public IActionResult GuardarEmpleado(EmpleadoModel oEmpleado)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -64,7 +64,7 @@ namespace MVC_Contactos.Controllers
                 return View();
         }
 
-        public IActionResult EliminarClientes(int IdEmpleado)
+        public IActionResult EliminarEmpleado(int IdEmpleado)
         {
             //Solo devuelve la vista(después de realizar una posible actualización o guardado de datos)
             var oEmpleado = empleado.ObtenerEmpleado(IdEmpleado);

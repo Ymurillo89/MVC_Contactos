@@ -19,5 +19,7 @@ namespace MVC_Contactos.Models
         public string? Telefono { get; set; }
         [Required]
         public string? Email { get; set; }
+        [Required]
+        public string? DatosAdicionales { get; set; }
     }
 }

@@ -1,8 +1,49 @@
-﻿
+﻿@model List<EmpleadoModel>
 @{
     ViewData["Title"] = "MostrarEmpleado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>MostrarEmpleado</h1>
+<div class="card">
+  <div class="card-header">
+    Lista de empleados
+  </div>
+  <div class="card-body">
+    <a asp-action="GuardarEmpleado" asp-controller="Empleado" class="btn btn-success ">Crear empleado</a>
+      <hr />
+   <table class="table table-bordered">
+       <thead>
+           <tr>
+               <th>Nombre</th>
+               <th>Documento</th>
+               <th>Dirección</th>
+               <th>Teléfono</th>
+               <th>Email</th>
+               <th>Acciones</th>
+           </tr> 
+       </thead>
+       <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        <td>@item.Nombre</td>
+                        <td>@item.NumDocumento</td>
+                        <td>@item.Direccion</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <a asp-action="EditarEmpleado" asp-controller="Empleado" class="btn btn-primary btn-sm" asp-route-IdEmpleado="@item.IdEmpleado">Editar</a>
+                            <a asp-action="EliminarEmpleado" asp-controller="Empleado" class="btn btn-danger btn-sm" asp-route-IdEmpleado="@item.IdEmpleado">Eliminar</a>
+                            </td>
+
+                    </tr>
+                }
+       </tbody>
+   </table>
+  </div>
+</div>
+
+
+
 

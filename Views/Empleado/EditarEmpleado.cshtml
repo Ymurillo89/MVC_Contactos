@@ -1,0 +1,55 @@
+﻿@model EmpleadoModel
+@{
+    ViewData["Title"] = "EditarEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+  <div class="card-header">
+    Editar
+  </div>
+  <div class="card-body">
+  <form asp-action="EditarEmpleado" asp-controller="Empleado" method="post">
+      <input asp-for="IdEmpleado" type="hidden" class="form-control" >
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Nombre" type="text" class="form-control" >
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+        
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Documento</label>
+        <input asp-for="NumDocumento" type="number" class="form-control" >
+        <span asp-validation-for="NumDocumento" class="text-danger"></span>
+        
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Dirección</label>
+        <input asp-for="Direccion" type="text" class="form-control" >
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label">Teléfono</label>
+        <input asp-for="Telefono" type="number" class="form-control">
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Email </label>
+        <input asp-for="Email" type="text" class="form-control"  >
+        <span asp-validation-for="Email" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label for="form-label" class="form-label">Datos adicionales</label>
+        <textarea asp-for="DatosAdicionales" type="text" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="DatosAdicionales" class="text-danger"></span>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Editar</button>
+
+      <a asp-action="MostrarEmpleado" asp-controller="Empleado" class="btn btn-success ">Regresar</a>
+   </form>
+  </div>
+</div>
+

@@ -50,7 +50,7 @@ namespace MVC_Contactos.Data
             using (var conexion = new SqlConnection(cn.GetCadenaSQL()))
             {
                 conexion.Open();
-                string sentencia = $"select * from TBLCLIENTES where IdCliente = '{IdEmpleado}'";
+                string sentencia = $"select * from TBLEMPLEADO where IdEmpleado = '{IdEmpleado}'";
                 SqlCommand cmd = new SqlCommand(sentencia, conexion);
 
 
@@ -58,12 +58,13 @@ namespace MVC_Contactos.Data
                 {
                     while (dr.Read())
                     {
-                        olistaEmpleado.IdEmpleado = Convert.ToInt32(dr["IdCliente"]);
+                        olistaEmpleado.IdEmpleado = Convert.ToInt32(dr["IdEmpleado"]);
                         olistaEmpleado.Nombre = dr["StrNombre"].ToString();
                         olistaEmpleado.NumDocumento = Convert.ToInt32(dr["NumDocumento"]);
                         olistaEmpleado.Direccion = dr["StrDireccion"].ToString();
                         olistaEmpleado.Telefono = dr["StrTelefono"].ToString();
                         olistaEmpleado.Email = dr["StrEmail"].ToString();
+                        olistaEmpleado.DatosAdicionales = dr["strDatosAdicionales"].ToString();
                     }
 
                 }
@@ -84,15 +85,19 @@ namespace MVC_Contactos.Data
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("actualizar_Cliente", conexion);
+                    SqlCommand cmd = new SqlCommand("actualizar_Empleado", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("IdCliente", 0);
+                    cmd.Parameters.AddWithValue("IdEmpleado", 0);
                     cmd.Parameters.AddWithValue("StrNombre", oEmpleado.Nombre);
                     cmd.Parameters.AddWithValue("NumDocumento", oEmpleado.NumDocumento);
                     cmd.Parameters.AddWithValue("StrDireccion", oEmpleado.Direccion);
                     cmd.Parameters.AddWithValue("StrTelefono", oEmpleado.Telefono);
                     cmd.Parameters.AddWithValue("StrEmail", oEmpleado.Email);
-                    cmd.Parameters.AddWithValue("StrUsuarioModifica", "Andre");
+                    cmd.Parameters.AddWithValue("IdRolEmpleado", 1);
+                    cmd.Parameters.AddWithValue("DtmIngreso", DateTime.Now);
+                    cmd.Parameters.AddWithValue("DtmRetiro", DateTime.Now);
+                    cmd.Parameters.AddWithValue("strDatosAdicionales", oEmpleado.DatosAdicionales);
+                    cmd.Parameters.AddWithValue("StrUsuarioModifico", "Andre");
                     cmd.Parameters.AddWithValue("DtmFechaModifica", DateTime.Now);
 
                     cmd.ExecuteNonQuery();
@@ -124,19 +129,22 @@ namespace MVC_Contactos.Data
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("actualizar_Cliente", conexion);
+                    SqlCommand cmd = new SqlCommand("actualizar_Empleado", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("IdCliente", oEmpleado.IdEmpleado);
+                    cmd.Parameters.AddWithValue("IdEmpleado", oEmpleado.IdEmpleado);
                     cmd.Parameters.AddWithValue("StrNombre", oEmpleado.Nombre);
                     cmd.Parameters.AddWithValue("NumDocumento", oEmpleado.NumDocumento);
                     cmd.Parameters.AddWithValue("StrDireccion", oEmpleado.Direccion);
                     cmd.Parameters.AddWithValue("StrTelefono", oEmpleado.Telefono);
                     cmd.Parameters.AddWithValue("StrEmail", oEmpleado.Email);
-                    cmd.Parameters.AddWithValue("StrUsuarioModifica", "Andre");
+                    cmd.Parameters.AddWithValue("IdRolEmpleado", 1);
+                    cmd.Parameters.AddWithValue("DtmIngreso", DateTime.Now);
+                    cmd.Parameters.AddWithValue("DtmRetiro", DateTime.Now);
+                    cmd.Parameters.AddWithValue("strDatosAdicionales", oEmpleado.DatosAdicionales);
+                    cmd.Parameters.AddWithValue("StrUsuarioModifico", "Andre");
                     cmd.Parameters.AddWithValue("DtmFechaModifica", DateTime.Now);
 
                     cmd.ExecuteNonQuery();
-
 
                 }
                 respuesta = true;
@@ -163,7 +171,7 @@ namespace MVC_Contactos.Data
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("Eliminar_Cliente", conexion);
+                    SqlCommand cmd = new SqlCommand("Eliminar_Empleado", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("IdEmpleado", IdEmpleado);
 
